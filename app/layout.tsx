@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     default: "mathiewabbas.dev",
     template: "%s | mathiewabbas.dev",
   },
-  description: "Co-founder of unkey.dev and founder of planetfall.io",
+  description: "Tech.",
   openGraph: {
     title: "mathiewabbas.dev",
     description:
-      "Co-founder of unkey.dev and founder of planetfall.io",
+      "Tech.",
     url: "https://mathiewabbas.dev",
     siteName: "mathiewabbas.dev",
     images: [
