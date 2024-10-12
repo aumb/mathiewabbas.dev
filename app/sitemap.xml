@@ -1,0 +1,23 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mathiewabbas.dev</loc>
+    <description>A professional portfolio showcasing innovative projects, skills, and expertise in software engineering and technology.</description>
+    <lastmod>2024-10-12T12:00:00Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://mathiewabbas.dev/projects</loc>
+    <description>Explore a diverse collection of projects, featuring both professional work and personal innovations in software engineering and technology.</description>
+    <lastmod>2024-10-12T12:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mathiewabbas.dev/contact</loc>
+    <description>Connect through various social media platforms and professional networks. Find the best way to reach out for collaborations, opportunities, or inquiries.</description>
+    <lastmod>2024-10-12T12:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>
