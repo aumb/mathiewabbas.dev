@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import Particles from "./components/particles";
-import { NextSeo } from 'next-seo';
 import Head from "next/head";
 
 

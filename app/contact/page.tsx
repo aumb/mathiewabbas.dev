@@ -3,7 +3,6 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
-import { NextSeo } from 'next-seo';
 import Head from "next/head";
 
 const socials = [

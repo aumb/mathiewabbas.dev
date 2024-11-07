@@ -6,7 +6,6 @@ import { Card } from "../components/card";
 import { Article } from "./article";
 import { Redis } from "@upstash/redis";
 import { Eye } from "lucide-react";
-import { NextSeo } from 'next-seo';
 import Head from "next/head";
 
 const redis = Redis.fromEnv();
