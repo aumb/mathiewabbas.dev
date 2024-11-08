@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import Particles from "./components/particles";
 import Head from "next/head";
+import { Metadata } from "next";
 
 
 const navigation = [
@@ -9,13 +10,47 @@ const navigation = [
   { name: "Contact", href: "/contact" },
 ];
 
+export const metadata: Metadata = {
+  title: {
+    default: "mathiewabbas.dev",
+    template: "%s | mathiewabbas.dev",
+  },
+  description: "A professional portfolio showcasing innovative projects, skills, and expertise in software engineering and technology.",
+  openGraph: {
+    title: "mathiewabbas.dev",
+    description:
+      "A professional portfolio showcasing innovative projects, skills, and expertise in software engineering and technology.",
+    url: "https://mathiewabbas.dev",
+    siteName: "mathiewabbas.dev",
+    images: [
+      {
+        url: "https://mathiewabba.dev/og.png",
+        width: 1920,
+        height: 1080,
+      },
+    ],
+    locale: "en-US",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    shortcut: "/favicon.png",
+  },
+};
+
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>mathiewabbas.dev</title>
-        <meta name="description" content="A professional portfolio showcasing innovative projects, skills, and expertise in software engineering and technology." />
-      </Head>
       <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
         <nav className="my-16 animate-fade-in">
           <ul className="flex items-center justify-center gap-4">
