@@ -21,9 +21,9 @@ export default async function ProjectsPage() {
     return acc;
   }, {} as Record<string, number>);
 
-  const featured = allProjects.find((project) => project.slug === "marine-watch")!;
-  const top2 = allProjects.find((project) => project.slug === "mason-templates")!;
-  const top3 = allProjects.find((project) => project.slug === "rick-and-morty-verse")!;
+  const featured = allProjects.find((project) => project.slug === "textframe")!;
+  const top2 = allProjects.find((project) => project.slug === "marine-watch")!;
+  const top3 = allProjects.find((project) => project.slug === "mason-templates")!;
   const sorted = allProjects
     .filter((p) => p.published)
     .filter(
