@@ -1,19 +1,14 @@
 "use client";
+import { Project } from "@/lib/types";
 import { ArrowLeft, Eye, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
-type Props = {
-	project: {
-		url?: string;
-		title: string;
-		description: string;
-		repository?: string;
-	};
+interface HeaderProps {
+	project: Project;
+}
 
-	views: number;
-};
-export const Header: React.FC<Props> = ({ project, views }) => {
+export const Header: React.FC<HeaderProps> = ({ project }) => {
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
 
@@ -62,7 +57,7 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 						>
 							<Eye className="w-5 h-5" />{" "}
 							{Intl.NumberFormat("en-US", { notation: "compact" }).format(
-								views,
+								project.views || 0,
 							)}
 						</span>
 						<Link target="_blank" href="https://www.linkedin.com/in/mathiewabbas/">

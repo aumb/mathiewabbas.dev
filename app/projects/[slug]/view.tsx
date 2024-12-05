@@ -1,17 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
+import { incrementViews } from "@/lib/pocketbase";
 
-export const ReportView: React.FC<{ slug: string }> = ({ slug }) => {
+interface Props {
+	id: string;
+}
+
+export const ReportView: React.FC<Props> = ({ id }) => {
 	useEffect(() => {
-		fetch("/api/incr", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ slug }),
-		});
-	}, [slug]);
+		incrementViews(id);
+	}, [id]);
 
 	return null;
 };
