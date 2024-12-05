@@ -57,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ project }) => {
 						>
 							<Eye className="w-5 h-5" />{" "}
 							{Intl.NumberFormat("en-US", { notation: "compact" }).format(
-								project.views || 0,
+								project.views,
 							)}
 						</span>
 						<Link target="_blank" href="https://www.linkedin.com/in/mathiewabbas/">
