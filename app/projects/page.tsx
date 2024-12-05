@@ -6,17 +6,13 @@ import { Eye } from 'lucide-react';
 import { Article } from './article';
 import Head from 'next/head';
 
-export const revalidate = 5;
-
 export default async function ProjectsPage() {
   const projects = await getAllProjects();
 
-  // Filter and sort projects
-  const publishedProjects = projects.filter(p => p.published);
-  const featured = publishedProjects.find(p => p.rank === 1);
-  const top2 = publishedProjects.find(p => p.rank === 2);
-  const top3 = publishedProjects.find(p => p.rank === 3);
-  const otherProjects = publishedProjects.filter(
+  const featured = projects.find(p => p.rank === 1);
+  const top2 = projects.find(p => p.rank === 2);
+  const top3 = projects.find(p => p.rank === 3);
+  const otherProjects = projects.filter(
     p => p.rank !== 1 && p.rank !== 2 && p.rank !== 3
   )
 
@@ -59,7 +55,7 @@ export default async function ProjectsPage() {
                       <span className="flex items-center gap-1 text-xs text-zinc-500">
                         <Eye className="w-4 h-4" />{" "}
                         {Intl.NumberFormat("en-US", { notation: "compact" }).format(
-                          featured.views ?? 0,
+                          featured.views,
                         )}
                       </span>
                     </div>

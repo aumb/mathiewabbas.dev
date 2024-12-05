@@ -5,7 +5,7 @@ export interface Project {
     content: string;
     repository: string | null;
     publishedAt: string | null;
-    views: number | null;
+    views: number;
     rank: number | null;
     image: string | null;
     url: string | null;
