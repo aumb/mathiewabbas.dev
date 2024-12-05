@@ -6,7 +6,7 @@ import { Eye } from 'lucide-react';
 import { Article } from './article';
 import Head from 'next/head';
 
-export const revalidate = 0;
+export const revalidate = 5;
 
 export default async function ProjectsPage() {
   const projects = await getAllProjects();
@@ -19,8 +19,6 @@ export default async function ProjectsPage() {
   const otherProjects = publishedProjects.filter(
     p => p.rank !== 1 && p.rank !== 2 && p.rank !== 3
   )
-
-  console.log(publishedProjects.length)
 
   return (
     <>
