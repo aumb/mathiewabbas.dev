@@ -4,7 +4,7 @@ import { Header } from './header'
 import { ReportView } from './view'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 
-export const revalidate = 10;
+export const revalidate = 0;
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
   const slug = params?.slug;

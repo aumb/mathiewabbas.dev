@@ -6,7 +6,7 @@ import { Eye } from 'lucide-react';
 import { Article } from './article';
 import Head from 'next/head';
 
-export const revalidate = 10;
+export const revalidate = 0;
 
 export default async function ProjectsPage() {
   const projects = await getAllProjects();
