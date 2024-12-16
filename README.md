@@ -1,3 +1,1 @@
-Like so many others, I just wanted a place to collect some projects I worked on. Maybe I'll add a blog, maybe I won't. I'm not sure yet.
-
-If you like the design, check out the Repository on GitHub.
+Hey there! I'm excited to share some of my projects with you. I'm still figuring out what's next, but I thought this would be a fun way to showcase my work. If you like what you see, feel free to check out the code on GitHub!
