@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import Particles from "./components/particles";
-import Head from "next/head";
 import { Metadata } from "next";
 
 
