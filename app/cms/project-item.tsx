@@ -4,8 +4,10 @@ import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { cn } from "@/lib/utils"; 
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { GripVertical } from 'lucide-react';
+import { GripVertical, Pencil } from 'lucide-react';
 import { Project } from '@/lib/types';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export function ProjectItem({ project }: { project: Project }) {
     const {
@@ -36,12 +38,15 @@ export function ProjectItem({ project }: { project: Project }) {
                 <CardHeader>
                     <div className="flex justify-between items-center">
                         <CardTitle className="text-lg font-medium">{project.title}</CardTitle>
-                        <div 
-                            {...listeners}
-                            className="p-2 cursor-grab active:cursor-grabbing"
-                            aria-label="Drag to reorder"
-                        >
-                            <GripVertical className="h-5 w-5 text-muted-foreground" />
+                        <div className="flex items-center gap-2">
+                            <Link href={`/cms/edit/${project.id}`}>
+                                <Button variant="ghost" size="icon">
+                                    <Pencil className="h-4 w-4" />
+                                </Button>
+                            </Link>
+                            <div {...listeners} className="p-2 cursor-grab active:cursor-grabbing">
+                                <GripVertical className="h-5 w-5 text-muted-foreground" />
+                            </div>
                         </div>
                     </div>
                 </CardHeader>

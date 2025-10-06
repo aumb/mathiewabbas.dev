@@ -4,19 +4,21 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
     darkMode: ["class"],
     content: [
-		"./app/**/*.{js,ts,jsx,tsx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
 	],
-
 	theme: {
     	extend: {
     		typography: {
     			DEFAULT: {
     				css: {
     					'code::before': {
-    						content: '"'
+    						content: ''
     					},
     					'code::after': {
-    						content: '"'
+    						content: ''
     					}
     				}
     			},
