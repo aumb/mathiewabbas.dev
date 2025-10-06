@@ -44,10 +44,10 @@ export async function incrementViews(recordId: string) {
     }
 }
 
-export async function getAllProjects(): Promise<Project[]> {
+export async function getAllProjects(sort: string = '-date'): Promise<Project[]> {
     try {
         const records = await pb.collection('projects').getList(1, 50, {
-            sort: '-date',
+            sort: sort,
             filter: 'published = true',
             keepalive: false,
             cache: 'no-store',
@@ -72,5 +72,15 @@ export async function getAllProjects(): Promise<Project[]> {
     } catch (error) {
         console.error('Error fetching projects:', error);
         return [];
+    }
+}
+
+export async function setProjectRank(id: string, rank: number): Promise<void>{
+    try{
+        await pb.collection('projects').update(id, {
+            'rank': rank
+        });
+    }catch(error){
+        console.error('Error updating rank:', error);
     }
 }
