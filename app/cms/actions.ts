@@ -1,9 +1,9 @@
 "use server";
 
-import { pb } from "@/lib/pocketbase";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import PocketBase from "pocketbase";
 
 interface ProjectFormData {
     title: string;
@@ -19,6 +19,7 @@ export async function createProject(formData: ProjectFormData) {
     const cookieStore = cookies();
     const authCookie = cookieStore.get('pb_auth');
 
+    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
     try {
         if (authCookie) {
@@ -59,6 +60,8 @@ export async function createProject(formData: ProjectFormData) {
 export async function updateProject(id: string, formData: ProjectFormData) {
     const cookieStore = cookies();
     const authCookie = cookieStore.get('pb_auth');
+
+    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
     try {
         if (authCookie) {

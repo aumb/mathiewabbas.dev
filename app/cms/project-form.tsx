@@ -47,16 +47,11 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
             : await createProject(projectData);
 
         if (result.success) {
-            setSuccessMessage(result.message);
-            if (!isEditMode) {
-                (event.target as HTMLFormElement).reset();
-                setPublished(false);
-            }
+            router.push('/cms');
         } else {
             setError(result.message);
+            setIsSubmitting(false);
         }
-
-        setIsSubmitting(false);
     };
 
     return (

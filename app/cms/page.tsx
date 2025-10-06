@@ -11,7 +11,7 @@ export default async function CmsPage() {
     return (
         <div className="p-4 sm:p-6 lg:p-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-2xl font-bold">Reorder Projects</h1>
+                <h1 className="text-2xl font-bold">CMS</h1>
 
                 <div className="flex items-center gap-2">
                     <Link href="/cms/add">

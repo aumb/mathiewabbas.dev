@@ -2,11 +2,12 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import PocketBase from 'pocketbase';
 import { LoginForm } from './login-form';
-import { pb } from '@/lib/pocketbase';
 
 export default async function LoginPage() {
     const cookieStore = cookies();
     const authCookie = cookieStore.get('pb_auth');
+
+    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
     if (authCookie) {
         try {

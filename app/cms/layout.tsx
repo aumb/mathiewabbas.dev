@@ -1,4 +1,3 @@
-import { pb } from '@/lib/pocketbase';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import PocketBase from 'pocketbase'
@@ -9,11 +8,10 @@ export default async function CmsLayout({
 }: {
     children: React.ReactNode;
 }) {
-    console.log("--- CMS Layout: Checking Auth ---");
-
     const cookieStore = cookies();
     const authCookie = cookieStore.get('pb_auth');
 
+    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
     try {
         if (authCookie) {
