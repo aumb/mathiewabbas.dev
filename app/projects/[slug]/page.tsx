@@ -13,11 +13,11 @@ export default async function PostPage({ params }: { params: { slug: string } })
   }
 
   return (
-    <div className="bg-zinc-50 min-h-screen">
+    <div className="bg-zinc-900 min-h-screen">
       <Header project={project} />
       <ReportView id={project.id} />
 
-      <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless">
+      <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless prose-invert">
         <MDXRemote source={project.content} />
       </article>
     </div>

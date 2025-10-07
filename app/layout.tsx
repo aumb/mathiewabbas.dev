@@ -61,13 +61,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+    <html lang="en" className={["dark", inter.variable, calSans.variable].join(" ")}>
       <head>
         <Analytics />
       </head>
       <body
-        className={`bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-          }`}
+        className={`bg-background ${
+          process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+        }`}
       >
         {children}
       </body>
