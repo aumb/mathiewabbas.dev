@@ -5,6 +5,18 @@ const nextConfig = {
 		mdxRs: true,
 		serverActions: true,
 	},
+	async rewrites() {
+		return [
+			{
+				source: '/mp/js/script.js',
+				destination: 'https://plausible.mathiewabbas.dev/js/script.js',
+			},
+			{
+				source: '/mp/api/event',
+				destination: 'https://plausible.mathiewabbas.dev/api/event',
+			},
+		]
+	},
 };
 
 export default nextConfig;
