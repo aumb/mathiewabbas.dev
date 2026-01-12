@@ -3,13 +3,12 @@ const nextConfig = {
 	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 	experimental: {
 		mdxRs: true,
-		serverActions: true,
 	},
 	async rewrites() {
 		return [
 			{
 				source: '/mp/js/script.js',
-				destination: 'https://plausible.mathiewabbas.dev/js/script.js',
+				destination: process.env.PLAUSIBLE_SCRIPT_URL || 'https://plausible.io/js/script.js',
 			},
 		]
 	},
