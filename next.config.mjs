@@ -11,10 +11,6 @@ const nextConfig = {
 				source: '/mp/js/script.js',
 				destination: 'https://plausible.mathiewabbas.dev/js/script.js',
 			},
-			{
-				source: '/mp/api/event',
-				destination: 'https://plausible.mathiewabbas.dev/api/event',
-			},
 		]
 	},
 };
