@@ -1,14 +1,42 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+function getClientIp(request: NextRequest): string {
+    // Check various headers in order of preference
+    // Cloudflare
+    const cfConnectingIp = request.headers.get('cf-connecting-ip');
+    if (cfConnectingIp) return cfConnectingIp;
+
+    // Vercel
+    const vercelForwardedFor = request.headers.get('x-vercel-forwarded-for');
+    if (vercelForwardedFor) return vercelForwardedFor.split(',')[0].trim();
+
+    // Standard proxy header
+    const xForwardedFor = request.headers.get('x-forwarded-for');
+    if (xForwardedFor) return xForwardedFor.split(',')[0].trim();
+
+    // Nginx proxy
+    const xRealIp = request.headers.get('x-real-ip');
+    if (xRealIp) return xRealIp;
+
+    // Next.js runtime IP (may not be available in all environments)
+    if (request.ip) return request.ip;
+
+    return '';
+}
+
 export async function POST(request: NextRequest) {
     const body = await request.text();
-    const headers = new Headers();
+    const clientIp = getClientIp(request);
+    const userAgent = request.headers.get('user-agent') || '';
 
-    headers.set('User-Agent', request.headers.get('user-agent') || '');
-    headers.set('X-Forwarded-For', request.headers.get('x-forwarded-for') || request.ip || '');
+    const headers = new Headers();
+    headers.set('User-Agent', userAgent);
+    headers.set('X-Forwarded-For', clientIp);
     headers.set('Content-Type', 'application/json');
 
-    const resp = await fetch('https://plausible.mathiewabbas.dev/api/event', {
+    const plausibleUrl = process.env.PLAUSIBLE_API_URL || 'https://plausible.io/api/event';
+
+    const resp = await fetch(plausibleUrl, {
         method: 'POST',
         headers,
         body,

@@ -1,6 +1,6 @@
 import "../global.css";
-import { Inter } from "@next/font/google";
-import LocalFont from "@next/font/local";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 
@@ -50,7 +50,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const calSans = LocalFont({
+const calSans = localFont({
   src: "../public/fonts/CalSans-SemiBold.ttf",
   variable: "--font-calsans",
 });
@@ -66,9 +66,8 @@ export default function RootLayout({
         <Analytics />
       </head>
       <body
-        className={`bg-background ${
-          process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-        }`}
+        className={`bg-background ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+          }`}
       >
         {children}
       </body>
