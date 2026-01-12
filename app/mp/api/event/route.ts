@@ -1,24 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 function getClientIp(request: NextRequest): string {
-    // Check various headers in order of preference
-    // Cloudflare
     const cfConnectingIp = request.headers.get('cf-connecting-ip');
     if (cfConnectingIp) return cfConnectingIp;
 
-    // Vercel
     const vercelForwardedFor = request.headers.get('x-vercel-forwarded-for');
     if (vercelForwardedFor) return vercelForwardedFor.split(',')[0].trim();
 
-    // Standard proxy header
     const xForwardedFor = request.headers.get('x-forwarded-for');
     if (xForwardedFor) return xForwardedFor.split(',')[0].trim();
 
-    // Nginx proxy
     const xRealIp = request.headers.get('x-real-ip');
     if (xRealIp) return xRealIp;
 
-    // Next.js runtime IP (may not be available in all environments)
     if (request.ip) return request.ip;
 
     return '';
