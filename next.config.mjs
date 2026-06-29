@@ -3,6 +3,11 @@ const nextConfig = {
 	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 	experimental: {
 		mdxRs: true,
+		// Don't serve stale dynamic pages from the client router cache, so the
+		// projects list shows updated view counts when navigating back to it.
+		staleTimes: {
+			dynamic: 0,
+		},
 	},
 	// Reverse proxy for PostHog (US region) under /mp so analytics requests go
 	// to our own domain and are less likely to be blocked by ad blockers.
