@@ -6,6 +6,9 @@ import { Eye } from 'lucide-react';
 import { Article } from './article';
 import Head from 'next/head';
 
+// Always render fresh so updated view counts show on navigation back here.
+export const dynamic = 'force-dynamic';
+
 export default async function ProjectsPage() {
   const projects = await getAllProjects();
 

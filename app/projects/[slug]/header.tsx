@@ -1,6 +1,7 @@
 "use client";
 
 import { Project } from "@/lib/types";
+import { incrementViews } from "@/lib/pocketbase";
 import { ArrowLeft, Eye, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
@@ -12,6 +13,18 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ project }) => {
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
+	const [views, setViews] = useState(project.views);
+	const hasIncremented = useRef(false);
+
+	useEffect(() => {
+		if (hasIncremented.current) return;
+		hasIncremented.current = true;
+		// Optimistically reflect the visit, then reconcile with the server count.
+		setViews((current) => current + 1);
+		incrementViews(project.id).then((newViews) => {
+			if (typeof newViews === "number") setViews(newViews);
+		});
+	}, [project.id]);
 
 	const links: { label: string; href: string }[] = [];
 	if (project.repository) {
@@ -57,7 +70,7 @@ export const Header: React.FC<HeaderProps> = ({ project }) => {
 						>
 							<Eye className="w-5 h-5" />{" "}
 							{Intl.NumberFormat("en-US", { notation: "compact" }).format(
-								project.views,
+								views,
 							)}
 						</span>
 						<Link target="_blank" href="https://www.linkedin.com/in/mathiewabbas/">
