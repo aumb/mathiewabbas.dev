@@ -31,16 +31,16 @@ export async function getProjectById(id: string): Promise<Project | null> {
     }
 }
 
-export async function incrementViews(recordId: string) {
+export async function incrementViews(recordId: string): Promise<number | null> {
     try {
         const record = await pb.collection('projects').getOne(recordId)
-        await pb.collection('projects').update(recordId, {
+        const updated = await pb.collection('projects').update(recordId, {
             views: (record.views || 0) + 1,
-            keepalive: false,
-            cache: 'no-store',
         })
+        return updated.views ?? null
     } catch (error) {
         console.error('Error incrementing views:', error)
+        return null
     }
 }
 
