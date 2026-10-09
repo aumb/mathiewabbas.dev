@@ -12,7 +12,7 @@ interface ProjectFormData {
     repository: string;
     url: string;
     published: boolean;
-    date: string; 
+    date: string | null;
 }
 
 export async function createProject(formData: ProjectFormData) {

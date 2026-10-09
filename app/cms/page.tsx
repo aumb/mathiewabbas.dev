@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { LogoutButton } from "./logout_button";
 
 export default async function CmsPage() {
-    const projects = await getAllProjects('rank');
+    const projects = await getAllProjects('rank', true);
     
     return (
         <div className="p-4 sm:p-6 lg:p-8">

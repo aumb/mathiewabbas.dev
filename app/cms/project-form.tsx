@@ -32,6 +32,8 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
         setSuccessMessage(null);
 
         const formData = new FormData(event.currentTarget);
+        // An empty date shows the project as "SOON".
+        const date = formData.get('date') as string;
         const projectData = {
             title: formData.get('title') as string,
             description: formData.get('description') as string,
@@ -39,7 +41,7 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
             repository: formData.get('repository') as string,
             url: formData.get('url') as string,
             published: published,
-            date: new Date(formData.get('date') as string).toISOString(),
+            date: date ? new Date(date).toISOString() : null,
         };
 
         const result = isEditMode
@@ -69,10 +71,18 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
                 <Textarea id="content" name="content" rows={10} required defaultValue={initialData?.content} />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="date">Date</Label>
-                <Input id="date" name="date" type="date" required   defaultValue={
-                        initialData?.date
-                            ? initialData.date.split(" ")[0]
+                <Label htmlFor="repository">Repository</Label>
+                <Input id="repository" name="repository" placeholder="owner/repo" defaultValue={initialData?.repository ?? ""} />
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="url">Website</Label>
+                <Input id="url" name="url" type="url" placeholder="https://" defaultValue={initialData?.url ?? ""} />
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="date">Date (leave empty for SOON)</Label>
+                <Input id="date" name="date" type="date" defaultValue={
+                        initialData
+                            ? initialData.date?.split(" ")[0] ?? ""
                             : new Date().toISOString().split("T")[0]
                     } />
             </div>

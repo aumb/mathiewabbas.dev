@@ -44,11 +44,11 @@ export async function incrementViews(recordId: string): Promise<number | null> {
     }
 }
 
-export async function getAllProjects(sort: string = '-date'): Promise<Project[]> {
+export async function getAllProjects(sort: string = '-date', includeDrafts = false): Promise<Project[]> {
     try {
         const records = await pb.collection('projects').getList(1, 50, {
             sort: sort,
-            filter: 'published = true',
+            ...(includeDrafts ? {} : { filter: 'published = true' }),
             keepalive: false,
             cache: 'no-store',
         });
