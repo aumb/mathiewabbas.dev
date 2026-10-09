@@ -5,9 +5,10 @@ import { Project } from './types'
 export const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL)
 
 
-export async function getProjectById(id: string): Promise<Project | null> {
+// Pass an authenticated client (see lib/pocketbase-server.ts) to read drafts.
+export async function getProjectById(id: string, client: PocketBase = pb): Promise<Project | null> {
     try {
-        const record = await pb.collection('projects').getFirstListItem(`id="${id}"`, {
+        const record = await client.collection('projects').getOne(id, {
             keepalive: false,
             cache: 'no-store',
         })
@@ -31,22 +32,9 @@ export async function getProjectById(id: string): Promise<Project | null> {
     }
 }
 
-export async function incrementViews(recordId: string): Promise<number | null> {
+export async function getAllProjects(sort: string = '-date', includeDrafts = false, client: PocketBase = pb): Promise<Project[]> {
     try {
-        const record = await pb.collection('projects').getOne(recordId)
-        const updated = await pb.collection('projects').update(recordId, {
-            views: (record.views || 0) + 1,
-        })
-        return updated.views ?? null
-    } catch (error) {
-        console.error('Error incrementing views:', error)
-        return null
-    }
-}
-
-export async function getAllProjects(sort: string = '-date', includeDrafts = false): Promise<Project[]> {
-    try {
-        const records = await pb.collection('projects').getList(1, 50, {
+        const records = await client.collection('projects').getList(1, 50, {
             sort: sort,
             ...(includeDrafts ? {} : { filter: 'published = true' }),
             keepalive: false,
@@ -72,15 +60,5 @@ export async function getAllProjects(sort: string = '-date', includeDrafts = fal
     } catch (error) {
         console.error('Error fetching projects:', error);
         return [];
-    }
-}
-
-export async function setProjectRank(id: string, rank: number): Promise<void>{
-    try{
-        await pb.collection('projects').update(id, {
-            'rank': rank
-        });
-    }catch(error){
-        console.error('Error updating rank:', error);
     }
 }

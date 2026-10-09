@@ -17,7 +17,7 @@ import {
     verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
-import { setProjectRank } from '@/lib/pocketbase';
+import { reorderProjects } from './actions';
 import { ProjectItem } from './project-item';
 import { Project } from '@/lib/types';
 
@@ -42,12 +42,7 @@ export function ProjectList({ initialProjects }: { initialProjects: Project[] })
             
             setProjects(reorderedProjects);
 
-
-            const updatePromises = reorderedProjects.map((project, index) =>
-                setProjectRank(project.id, index + 1)
-            );
-            
-            await Promise.all(updatePromises);
+            await reorderProjects(reorderedProjects.map((project) => project.id));
         }
     }
 
