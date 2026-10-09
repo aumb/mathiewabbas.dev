@@ -1,7 +1,7 @@
 "use client";
 
 import { Project } from "@/lib/types";
-import { incrementViews } from "@/lib/pocketbase";
+import { incrementViews } from "./actions";
 import { ArrowLeft, Eye, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";

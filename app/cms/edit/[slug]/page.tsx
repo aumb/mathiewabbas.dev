@@ -1,11 +1,13 @@
 import { getProjectById } from "@/lib/pocketbase";
+import { getUserPb } from "@/lib/pocketbase-server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ProjectForm } from "../../project-form";
 
 export default async function EditProjectPage({ params }: { params: { slug: string } }) {
-    const project = await getProjectById(params.slug);
+    const pb = await getUserPb();
+    const project = pb ? await getProjectById(params.slug, pb) : null;
 
     if (!project) {
         notFound();

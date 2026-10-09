@@ -37,7 +37,12 @@ export function ProjectItem({ project }: { project: Project }) {
             >
                 <CardHeader>
                     <div className="flex justify-between items-center">
-                        <CardTitle className="text-lg font-medium">{project.title}</CardTitle>
+                        <CardTitle className="text-lg font-medium">
+                            {project.title}
+                            {!project.published && (
+                                <span className="ml-2 text-xs font-normal text-muted-foreground">Draft</span>
+                            )}
+                        </CardTitle>
                         <div className="flex items-center gap-2">
                             <Link href={`/cms/edit/${project.id}`}>
                                 <Button variant="ghost" size="icon">

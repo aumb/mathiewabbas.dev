@@ -9,7 +9,8 @@ export async function POST(request: NextRequest) {
         const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
         const authData = await pb.collection('users').authWithPassword(email, password);
-        const cookie = pb.authStore.exportToCookie({ httpOnly: false });
+        // Only the server reads this cookie, so keep it out of reach of page scripts.
+        const cookie = pb.authStore.exportToCookie({ httpOnly: true });
 
         const response = NextResponse.json({ 
             success: true, 

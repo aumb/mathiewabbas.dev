@@ -1,4 +1,5 @@
 import { getAllProjects } from "@/lib/pocketbase";
+import { getUserPb } from "@/lib/pocketbase-server";
 import { ProjectList } from "./project-list";
 import Link from "next/link";
 import { Plus } from "lucide-react";
@@ -6,7 +7,9 @@ import { Button } from "@/components/ui/button";
 import { LogoutButton } from "./logout_button";
 
 export default async function CmsPage() {
-    const projects = await getAllProjects('rank');
+    // Read as the signed-in user, so drafts are included.
+    const pb = await getUserPb();
+    const projects = pb ? await getAllProjects('rank', true, pb) : [];
     
     return (
         <div className="p-4 sm:p-6 lg:p-8">

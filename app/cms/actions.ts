@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import PocketBase from "pocketbase";
+import { getUserPb } from "@/lib/pocketbase-server";
 
 interface ProjectFormData {
     title: string;
@@ -12,7 +13,7 @@ interface ProjectFormData {
     repository: string;
     url: string;
     published: boolean;
-    date: string; 
+    date: string | null;
 }
 
 export async function createProject(formData: ProjectFormData) {
@@ -83,6 +84,26 @@ export async function updateProject(id: string, formData: ProjectFormData) {
     } catch (error: any) {
         console.error("Failed to update project:", error);
         return { success: false, message: `Failed to update project: ${error.message}` };
+    }
+}
+
+// Sets each project's rank to its position in ids, starting at 1.
+export async function reorderProjects(ids: string[]) {
+    const pb = await getUserPb();
+    if (!pb) return { success: false, message: "User not authenticated" };
+
+    try {
+        await Promise.all(ids.map((id, index) =>
+            pb.collection('projects').update(id, { rank: index + 1 })
+        ));
+
+        revalidatePath('/cms');
+        revalidatePath('/projects');
+
+        return { success: true, message: "Projects reordered." };
+    } catch (error) {
+        console.error("Failed to reorder projects:", error);
+        return { success: false, message: "Failed to reorder projects." };
     }
 }
 
